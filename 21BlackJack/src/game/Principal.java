@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+public class Principal {
+    public static void inicio() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenido a Blackjack versión consola");
         System.out.print("Ingrese su nombre: ");
@@ -44,8 +44,10 @@ public class Main {
                 jugador.agregarCarta(nueva);
                 historial.push(nueva);
                 jugador.mostrarMano();
-                if (jugador.calcularPuntaje() > 21) break;
-            } else break;
+                if (jugador.calcularPuntaje() > 21)
+                    break;
+            } else
+                break;
         }
 
         // Turno del dealer
@@ -82,33 +84,5 @@ public class Main {
         } else {
             System.out.println("\nGana el Dealer.");
         }
-    }
-
-    // Métodos auxiliares
-    static Baraja crearBaraja() {
-        String[] palos = {"Corazones", "Diamantes", "Picas", "Tréboles"};
-        String[] numeros = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        Baraja baraja = new Baraja();
-        for (String palo : palos) {
-            for (String numero : numeros) {
-                baraja.agregarCarta(new Carta(numero, palo));
-            }
-        }
-        return baraja;
-    }
-
-    static Baraja barajar(Baraja baraja) {
-        Carta[] array = new Carta[52];
-        int i = 0;
-        while (baraja.cabeza != null) array[i++] = baraja.robarCarta();
-        for (int j = 0; j < array.length; j++) {
-            int k = (int) (Math.random() * array.length);
-            Carta temp = array[j];
-            array[j] = array[k];
-            array[k] = temp;
-        }
-        Baraja nueva = new Baraja();
-        for (Carta c : array) nueva.agregarCarta(c);
-        return nueva;
     }
 }
